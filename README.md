@@ -60,8 +60,8 @@ Antes de começar, certifique-se de ter instalado:
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/ai-integration-lab.git
-cd ai-integration-lab
+git clone https://github.com/lcassiano/deep-learning-lab.git
+cd deep-learning-lab
 ```
 
 ### 2. Inicie o Ollama
@@ -104,7 +104,7 @@ print(response['response'])
 ## 📁 Estrutura do Projeto
 
 ```
-ai-integration-lab/
+deep-learning-lab/
 ├── docker-compose.yml          # Configuração do Ollama
 ├── examples/                   # Exemplos práticos
 │   ├── python/                # Códigos Python
@@ -150,9 +150,9 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 🆘 Suporte
 
-- 📧 Email: seu-email@exemplo.com
-- 💬 Issues: [GitHub Issues](https://github.com/seu-usuario/ai-integration-lab/issues)
-- 📚 Wiki: [Documentação completa](https://github.com/seu-usuario/ai-integration-lab/wiki)
+- 📧 Email: leandro@wetware.com.br
+- 💬 Issues: [GitHub Issues](https://github.com/lcassiano/deep-learning-lab/issues)
+- 📚 Wiki: [Documentação completa](https://github.com/lcassiano/deep-learning-lab/wiki)
 
 ---
 

@@ -13,8 +13,8 @@ Este guia te ajudará a configurar e usar o AI Integration Lab em poucos minutos
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/ai-integration-lab.git
-cd ai-integration-lab
+git clone https://github.com/lcassiano/deep-learning-lab.git
+cd deep-learning-lab
 ```
 
 ### 2. Configure as variáveis de ambiente
