@@ -15,6 +15,12 @@ services:
     restart: unless-stopped
     networks:
       - ai-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   # LobeChat - Interface web para chat com IA
   lobe-chat:
@@ -28,13 +34,23 @@ services:
       - OPENAI_API_BASE_URL=http://ollama:11434
       - OLLAMA_BASE_URL=http://ollama:11434
       - OLLAMA_MODELS=gemma3:1b,llama3.2:latest,qwen2.5:3b,deepseek-r1:1.5b
+      # Customizações de Layout
+      - LOBE_CHAT_THEME=dark
+      - LOBE_CHAT_PRIMARY_COLOR=#1677ff
+      - LOBE_CHAT_FONT_SIZE=14
+      - LOBE_CHAT_MESSAGE_DISPLAY=normal
+      - LOBE_CHAT_SIDEBAR_WIDTH=280
+      - LOBE_CHAT_AUTO_COLLAPSE_SIDEBAR=true
     volumes:
       - lobe_chat_data:/app/data
     restart: unless-stopped
     networks:
       - ai-network
     depends_on:
-      - ollama
+      ollama:
+        condition: service_healthy
+      ollama-init:
+        condition: service_completed_successfully
 
   ollama-init:
     image: alpine:latest
@@ -44,16 +60,26 @@ services:
     command: >
       sh -c "
         apk add --no-cache curl &&
-        sleep 10 &&
+        echo 'Aguardando Ollama iniciar...' &&
+        until curl -f http://ollama:11434/api/tags > /dev/null 2>&1; do
+          sleep 5
+        done &&
+        echo 'Ollama está pronto. Baixando modelos...' &&
         curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"gemma3:1b\"}' &&
+        echo 'gemma3:1b baixado' &&
         curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"llama3.2:latest\"}' &&
+        echo 'llama3.2:latest baixado' &&
         curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"qwen2.5:3b\"}' &&
-        curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"deepseek-r1:1.5b\"}'
+        echo 'qwen2.5:3b baixado' &&
+        curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"deepseek-r1:1.5b\"}' &&
+        echo 'deepseek-r1:1.5b baixado' &&
+        echo 'Todos os modelos foram baixados com sucesso!'
       "
     networks:
       - ai-network      
     depends_on:
-      - ollama
+      ollama:
+        condition: service_healthy
 
 volumes:
   ollama_data:

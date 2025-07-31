@@ -1,0 +1,50 @@
+/* Customizações CSS para LobeChat */
+
+/* Mudar cor do cabeçalho */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Customizar botões */
+.button {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Customizar mensagens */
+.message {
+  border-radius: 12px;
+  margin: 8px 0;
+}
+
+/* Customizar sidebar */
+.sidebar {
+  background: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+}
+
+/* Customizar input */
+.input {
+  border-radius: 20px;
+  border: 2px solid #e9ecef;
+}
+
+/* Customizar scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* Customizar tema escuro */
+[data-theme="dark"] .sidebar {
+  background: #1f1f1f;
+  border-right: 1px solid #333;
+} 
